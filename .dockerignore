@@ -1,0 +1,6 @@
+# For local development
+/.ruby-version
+/.bundle/
+
+# Gem files
+/vendor/
