@@ -4,7 +4,7 @@ A Discord bot to detect free verses. (WIP)
 
 ## Requirements
 
-When running this bot, set these environment variables.
+When running or deploying this bot, set these environment variables.
 
 *   DISCORD_BOT_TOKEN
 
@@ -29,4 +29,14 @@ bundle install
 
 # run
 bundle exec ruby main.rb
+```
+
+## Deploy
+
+```console
+heroku create free-verse-discord-bot
+heroku stack:set container
+heroku config:set DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
+git push heroku master
+heroku ps:scale bot=1
 ```
