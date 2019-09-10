@@ -2,6 +2,7 @@
 
 require 'discordrb'
 require 'ikku'
+require 'natto'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
 token = ENV[ENV_TOKEN]
@@ -12,14 +13,16 @@ end
 
 bot = Discordrb::Bot.new token: token
 basho = Ikku::Reviewer.new(rule: [3, 4, 5])
+mecab = Natto::MeCab.new
 
 bot.message do |event|
+  event.respond "[MeCab Result]\n```\n#{mecab.parse(event.content)}\n```"
   songs = basho.search(event.content)
   songs.each do |song|
-    text = song.phrases.map do |phrase|
-      phrase.map(&:to_s).join(' ')
+    song_text = song.phrases.map do |phrase|
+      phrase.map(&:to_s).join
     end.join("\n")
-    event.respond text
+    event.respond "[Detection]\n#{song_text}"
   end
 end
 
