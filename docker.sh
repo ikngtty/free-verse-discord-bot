@@ -40,5 +40,5 @@ docker build -t $FREEVERSE_IMAGE .
 log 'run a new container'
 docker run -d \
   --name $FREEVERSE_CONTAINER \
-  -e DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN \
+  -e DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:?'you must set!'} \
   $FREEVERSE_IMAGE
