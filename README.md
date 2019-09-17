@@ -42,7 +42,7 @@ Ruby's version is specified by `/.Dockerfile`.
 
 Ruby's version is specified by `/.ruby-version`.
 
-It is required for running that Mecab, which programs are in
+It is required for running that MeCab, which programs are in
 [redistribution](redistribution)
 directory, is installed in your environment.
 
@@ -66,9 +66,9 @@ heroku ps:scale bot=1
 
 ## License
 
-### Mecab
+### MeCab
 
-This repository includes [Mecab][mecab] programs.
+This repository includes [MeCab][mecab] programs.
 
 Source of the main program is
 [redistribution/mecab-0.996.tar.gz](redistribution/mecab-0.996.tar.gz)

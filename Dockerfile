@@ -2,7 +2,7 @@ FROM ruby:2.6
 
 ENV LANG C.UTF-8
 
-# Install Mecab
+# Install MeCab
 WORKDIR /usr/src/mecab
 COPY redistribution/mecab-0.996.tar.gz ./
 RUN tar zxf mecab-0.996.tar.gz \
@@ -15,7 +15,7 @@ RUN make check
 RUN make install
 RUN ldconfig
 
-# Install Mecab's IPA dictionary data
+# Install MeCab's IPA dictionary data
 WORKDIR /usr/src/mecab
 COPY redistribution/mecab-ipadic-2.7.0-20070801.tar.gz ./
 RUN tar zxf mecab-ipadic-2.7.0-20070801.tar.gz \
