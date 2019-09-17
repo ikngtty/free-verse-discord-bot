@@ -20,12 +20,25 @@ bot.ready do
 end
 
 bot.message do |event|
+  author_name = event.author.username
   songs = basho.search(event.content)
   songs.each do |song|
-    song_text = song.phrases.map do |phrase|
+    verses = song.phrases.map do |phrase|
       phrase.map(&:to_s).join
-    end.join("\n")
-    event.respond "[Detection]\n#{song_text}"
+    end
+    event.respond <<~EOF
+      ┏━━━━━━━━━━━　**本日の一句**　━━━━━━━━━━━
+      ┃
+      ┃　　#{verses[0]}
+      ┃
+      ┃　　　　#{verses[1]}
+      ┃
+      ┃　　　　　　#{verses[2]}
+      ┃
+      ┃　　　　　　　　　　　　　　　　　　詠み手：#{author_name}
+      ┃
+      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    EOF
   end
 end
 
