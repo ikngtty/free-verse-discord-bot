@@ -15,6 +15,10 @@ bot = Discordrb::Bot.new token: token
 basho = Ikku::Reviewer.new(rule: [3, 4, 5])
 mecab = Natto::MeCab.new
 
+bot.ready do
+  bot.game = '俳句じゃないやつ検出'
+end
+
 bot.message do |event|
   songs = basho.search(event.content)
   songs.each do |song|
