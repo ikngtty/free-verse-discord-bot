@@ -2,15 +2,34 @@
 
 A Discord bot to detect free verses. (WIP)
 
-## Requirements
+## Usage
+
+### Detection
+
+The bot joining to your server detects free verses and reports it
+by a discord message automatically.
+
+### Commands
+
+Commands can be run by a mention to the bot.
+
+Commands:
+
+*   `@<bot> mecab <text>`
+    *   Shows [MeCab][mecab] result about the specified text
+        by a discord message.
+
+## Development
+
+### Requirements
 
 When running or deploying this bot, set these environment variables.
 
 *   DISCORD_BOT_TOKEN
 
-## Run
+### Run
 
-### with Docker
+#### with Docker
 
 Ruby's version is specified by `/.Dockerfile`.
 
@@ -19,7 +38,7 @@ Ruby's version is specified by `/.Dockerfile`.
 ./docker.sh
 ```
 
-### in Local
+#### in Local
 
 Ruby's version is specified by `/.ruby-version`.
 
@@ -35,7 +54,7 @@ bundle install
 bundle exec ruby main.rb
 ```
 
-## Deploy
+### Deploy
 
 ```console
 heroku create free-verse-discord-bot
@@ -49,9 +68,7 @@ heroku ps:scale bot=1
 
 ### Mecab
 
-This repository includes
-[Mecab](http://taku910.github.io/mecab/)
-programs.
+This repository includes [Mecab][mecab] programs.
 
 Source of the main program is
 [redistribution/mecab-0.996.tar.gz](redistribution/mecab-0.996.tar.gz)
@@ -68,3 +85,5 @@ IPA dictionary data is
 and is included under the license which copy is
 [redistribution/mecab-ipadic-2.7.0-20070801-license](redistribution/mecab-ipadic-2.7.0-20070801-license)
 .
+
+[mecab]:http://taku910.github.io/mecab/
