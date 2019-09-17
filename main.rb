@@ -11,6 +11,9 @@ unless token
   exit 1
 end
 
+ENV_DEBUG_MODE = 'DEBUG_MODE'
+debug_mode = %w[1 true].member? ENV[ENV_DEBUG_MODE]
+
 bot = Discordrb::Bot.new token: token
 basho = Ikku::Reviewer.new(rule: [3, 4, 5])
 mecab = Natto::MeCab.new
@@ -45,10 +48,16 @@ end
 bot.mention do |event|
   command_format = "<@#{bot.profile.id}> %s"
   mecab_format = format(command_format, 'mecab')
+  info_format = format(command_format, 'info')
 
   if event.content.start_with? mecab_format
     message = event.content.delete_prefix(mecab_format).lstrip
     event.respond "```\n#{mecab.parse(message)}\n```"
+  elsif debug_mode and event.content.start_with? info_format
+    server_names = bot.servers.map do |id, server|
+      "<#{id}> #{server.name}"
+    end.join("\n")
+    event.respond "I'm in these servers:\n#{server_names}"
   end
 end
 

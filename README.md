@@ -18,6 +18,9 @@ Commands:
 *   `@<bot> mecab <text>`
     *   Shows [MeCab][mecab] result about the specified text
         by a discord message.
+*   `@<bot> info`
+    *   **DEBUG MODE ONLY**
+    *   Shows informations for debugging by discord messages.
 
 ## Development
 
@@ -25,7 +28,11 @@ Commands:
 
 When running or deploying this bot, set these environment variables.
 
-*   DISCORD_BOT_TOKEN
+*   `DISCORD_BOT_TOKEN`
+    *   Required
+*   `DEBUG_MODE`
+    *   Not required
+    *   To turn debug mode on, set `1` or `true`.
 
 ### Run
 
@@ -60,6 +67,7 @@ bundle exec ruby main.rb
 heroku create free-verse-discord-bot
 heroku stack:set container
 heroku config:set DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
+heroku config:set DEBUG_MODE=$DEBUG_MODE
 git push heroku master
 heroku ps:scale bot=1
 ```
