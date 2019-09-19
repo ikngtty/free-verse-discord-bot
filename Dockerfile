@@ -37,5 +37,6 @@ RUN gem update && gem cleanup
 RUN bundle config --global frozen 1 && bundle install
 
 ## Execute
-COPY main.rb .
+COPY main.rb ./
+COPY lib/ ./lib/
 CMD ["ruby", "main.rb"]
