@@ -42,7 +42,7 @@ Ruby's version is specified by `/.Dockerfile`.
 
 ```console
 # prepare and run
-./docker.sh
+./run_docker.sh
 ```
 
 #### in Local
@@ -75,6 +75,12 @@ heroku ps:scale bot=1
 ```
 
 ### Test
+
+#### with Docker
+
+```console
+./run_docker_as_test.sh
+```
 
 #### in Local
 

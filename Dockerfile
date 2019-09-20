@@ -40,4 +40,5 @@ RUN bundle config --global frozen 1 && bundle install
 ## Execute
 COPY main.rb ./
 COPY lib/ ./lib/
+COPY spec/ ./spec/
 CMD ["ruby", "main.rb"]
