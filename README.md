@@ -74,6 +74,14 @@ git push heroku master
 heroku ps:scale bot=1
 ```
 
+### Test
+
+#### in Local
+
+```console
+bundle exec rspec
+```
+
 ## License
 
 ### MeCab
