@@ -15,16 +15,29 @@ RUN make check
 RUN make install
 RUN ldconfig
 
-# Install MeCab's IPA dictionary data
-WORKDIR /usr/src/mecab
-COPY redistribution/mecab-ipadic-2.7.0-20070801.tar.gz ./
-RUN tar zxf mecab-ipadic-2.7.0-20070801.tar.gz \
-  && rm mecab-ipadic-2.7.0-20070801.tar.gz
+# # Install MeCab's IPA dictionary data
+# WORKDIR /usr/src/mecab
+# COPY redistribution/mecab-ipadic-2.7.0-20070801.tar.gz ./
+# RUN tar zxf mecab-ipadic-2.7.0-20070801.tar.gz \
+#   && rm mecab-ipadic-2.7.0-20070801.tar.gz
+#
+# WORKDIR /usr/src/mecab/mecab-ipadic-2.7.0-20070801
+# RUN ./configure --with-charset=utf8
+# RUN make
+# RUN make install
 
-WORKDIR /usr/src/mecab/mecab-ipadic-2.7.0-20070801
-RUN ./configure --with-charset=utf8
-RUN make
-RUN make install
+# NOTE: Need not to install MeCab's IPA dictionary data, because
+# mecab-ipadic-NEologd includes it. Instead, need to create the directory
+# which mecab-ipadic should have created.
+RUN mkdir -p $(mecab-config --dicdir)
+
+# Install mecab-ipadic-NEologd
+WORKDIR /usr/src/
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+# NOTE: Instead of configuring that MeCab's `dicdir` is "mecab-ipadic-neologd",
+# get "mecab-ipadic-neologd" to pretend to be "ipadic", default `dicdir`.
+RUN mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -a -y\
+      -p /usr/local/lib/mecab/dic/ipadic
 
 # About the application's body
 WORKDIR /usr/src/app

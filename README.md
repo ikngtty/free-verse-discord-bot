@@ -49,9 +49,11 @@ Ruby's version is specified by `/.Dockerfile`.
 
 Ruby's version is specified by `/.ruby-version`.
 
-It is required for running that MeCab, which programs are in
-[redistribution](redistribution)
-directory, is installed in your environment.
+For running, these are required:
+
+*   MeCab
+    *   in [redistribution](redistribution) directory
+*   [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd)
 
 ```console
 # prepare
@@ -93,5 +95,8 @@ IPA dictionary data is
 and is included under the license which copy is
 [redistribution/mecab-ipadic-2.7.0-20070801-license](redistribution/mecab-ipadic-2.7.0-20070801-license)
 .
+
+NOTE: IPA dictionary data in redistribution directory is not used now,
+because mecab-ipadic-NEologd download it automatically.
 
 [mecab]:http://taku910.github.io/mecab/
