@@ -88,15 +88,4 @@ and is included under the BSD license, which copy is
 [redistribution/mecab-0.996-license](redistribution/mecab-0.996-license)
 .
 
-IPA dictionary data is
-[redistribution/mecab-ipadic-2.7.0-20070801.tar.gz](redistribution/mecab-ipadic-2.7.0-20070801.tar.gz)
-, which is downloaded from
-[here](https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7MWVlSDBCSXZMTXM)
-and is included under the license which copy is
-[redistribution/mecab-ipadic-2.7.0-20070801-license](redistribution/mecab-ipadic-2.7.0-20070801-license)
-.
-
-NOTE: IPA dictionary data in redistribution directory is not used now,
-because mecab-ipadic-NEologd download it automatically.
-
 [mecab]:http://taku910.github.io/mecab/

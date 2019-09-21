@@ -15,17 +15,6 @@ RUN make check
 RUN make install
 RUN ldconfig
 
-# # Install MeCab's IPA dictionary data
-# WORKDIR /usr/src/mecab
-# COPY redistribution/mecab-ipadic-2.7.0-20070801.tar.gz ./
-# RUN tar zxf mecab-ipadic-2.7.0-20070801.tar.gz \
-#   && rm mecab-ipadic-2.7.0-20070801.tar.gz
-#
-# WORKDIR /usr/src/mecab/mecab-ipadic-2.7.0-20070801
-# RUN ./configure --with-charset=utf8
-# RUN make
-# RUN make install
-
 # NOTE: Need not to install MeCab's IPA dictionary data, because
 # mecab-ipadic-NEologd includes it. Instead, need to create the directory
 # which mecab-ipadic should have created.
