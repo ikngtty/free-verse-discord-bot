@@ -25,7 +25,6 @@ WORKDIR /usr/src/mecab/mecab-ipadic-2.7.0-20070801
 RUN ./configure --with-charset=utf8
 RUN make
 RUN make install
-RUN ldconfig
 
 # About the application's body
 WORKDIR /usr/src/app
