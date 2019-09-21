@@ -35,7 +35,8 @@ WORKDIR /usr/src/app
 COPY Gemfile Gemfile.lock ./
 RUN gem update && gem cleanup
 # NOTE: throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1 && bundle install
+RUN bundle config --global frozen 1 \
+  && bundle install --without dev
 
 ## Execute
 COPY main.rb ./

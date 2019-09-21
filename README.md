@@ -88,6 +88,14 @@ heroku ps:scale bot=1
 bundle exec rspec
 ```
 
+### Lint
+
+#### in Local
+
+```console
+bundle exec rubocop
+```
+
 ## License
 
 ### MeCab
