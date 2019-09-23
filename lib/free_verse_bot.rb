@@ -15,7 +15,7 @@ class FreeVerseBot
       verses = song.phrases.map do |phrase|
         phrase.map(&:to_s).join
       end
-      event.respond <<~EOF
+      event.respond <<~EOD
         ┏━━━━━━━━━━━　**本日の一句**　━━━━━━━━━━━
         ┃
         ┃　　#{verses[0]}
@@ -27,7 +27,7 @@ class FreeVerseBot
         ┃　　　　　　　　　　　　　　　　　　詠み手：#{author_name}
         ┃
         ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      EOF
+      EOD
     end
   end
 
