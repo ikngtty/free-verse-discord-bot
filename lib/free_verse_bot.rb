@@ -38,14 +38,14 @@ class FreeVerseBot
   end
 
   def handle_mention_event(event)
-    command_format = "<@#{@bot.profile.id}> %s"
-    mecab_format = format(command_format, 'mecab')
-    info_format = format(command_format, 'info')
+    command_prefix_format = "<@#{@bot.profile.id}> %s"
+    mecab_prefix = format(command_prefix_format, 'mecab')
+    info_prefix = format(command_prefix_format, 'info')
 
-    if event.content.start_with? mecab_format
-      message = event.content.delete_prefix(mecab_format).lstrip
+    if event.content.start_with?(mecab_prefix)
+      message = event.content.delete_prefix(mecab_prefix).lstrip
       mecab_command(message, event)
-    elsif @debug_mode and event.content.start_with? info_format
+    elsif @debug_mode && event.content.start_with?(info_prefix)
       info_command(event)
     end
   end
