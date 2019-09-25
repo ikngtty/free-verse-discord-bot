@@ -67,6 +67,8 @@ class FreeVerseBot
   end
 
   def info_command(event)
+    event.respond "The current rule is: #{@get_rule.call}"
+
     server_names = @bot.servers.map do |id, server|
       "<#{id}> #{server.name}"
     end.join("\n")
