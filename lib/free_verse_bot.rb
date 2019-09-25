@@ -15,8 +15,11 @@ class FreeVerseBot
   def handle_message_event(event)
     return if event.author.bot_account?
 
-    do_command(event) if may_be_command?(event)
-    detect(event)
+    if may_be_command?(event)
+      do_command(event)
+    else
+      detect(event)
+    end
   end
 
   private
