@@ -1,16 +1,22 @@
 # frozen_string_literal: true
 
+# NOTE: "Ikku::Reviewer" is so long and "reviewr" is so ambiguous
+# that we call it "basho", named after "Matsuo Basho".
+
 class FreeVerseBot
   def initialize(args)
     @bot = args[:discordrb_bot]
-    @basho = args[:ikku_reviewer]
+    @get_rule = args[:get_rule]
+    @get_basho = args[:get_ikku_reviewer]
     @mecab = args[:mecab]
     @debug_mode = args[:debug_mode]
   end
 
   def handle_message_event(event)
     author_name = event.author.username
-    songs = @basho.search(event.content)
+    rule = @get_rule.call
+    basho = @get_basho.call(rule: rule)
+    songs = basho.search(event.content)
     songs.each do |song|
       verses = song.phrases.map do |phrase|
         phrase.map(&:to_s).join

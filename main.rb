@@ -4,6 +4,7 @@ require 'discordrb'
 require 'ikku'
 require 'natto'
 require_relative './lib/free_verse_bot'
+require_relative './lib/rule_generator'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
 token = ENV[ENV_TOKEN]
@@ -16,11 +17,11 @@ ENV_DEBUG_MODE = 'DEBUG_MODE'
 debug_mode = %w[1 true].member? ENV[ENV_DEBUG_MODE]
 
 bot = Discordrb::Bot.new token: token
-basho = Ikku::Reviewer.new(rule: [3, 4, 5])
 mecab = Natto::MeCab.new
 free_verse_bot = FreeVerseBot.new(
   discordrb_bot: bot,
-  ikku_reviewer: basho,
+  get_rule: RuleGenerator.new,
+  get_ikku_reviewer: Ikku::Reviewer.method(:new),
   mecab: mecab,
   debug_mode: debug_mode
 )
