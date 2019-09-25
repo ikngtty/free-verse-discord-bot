@@ -31,6 +31,5 @@ bot.ready do
 end
 
 bot.message(&free_verse_bot.method(:handle_message_event))
-bot.mention(&free_verse_bot.method(:handle_mention_event))
 
 bot.run

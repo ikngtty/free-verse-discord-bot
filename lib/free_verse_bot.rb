@@ -15,6 +15,13 @@ class FreeVerseBot
   def handle_message_event(event)
     return if event.author.bot_account?
 
+    do_command(event) if may_be_command?(event)
+    detect(event)
+  end
+
+  private
+
+  def detect(event)
     author_name = event.author.username
     rule = @get_rule.call
     basho = @get_basho.call(rule: rule)
@@ -39,8 +46,8 @@ class FreeVerseBot
     end
   end
 
-  def handle_mention_event(event)
-    command_prefix_format = "<@#{@bot.profile.id}> %s"
+  def do_command(event)
+    command_prefix_format = "#{at_sign_to_me} %s"
     mecab_prefix = format(command_prefix_format, 'mecab')
     info_prefix = format(command_prefix_format, 'info')
 
@@ -52,8 +59,6 @@ class FreeVerseBot
     end
   end
 
-  private
-
   def mecab_command(message, event)
     event.respond "```\n#{@mecab.parse(message)}\n```"
   end
@@ -63,5 +68,13 @@ class FreeVerseBot
       "<#{id}> #{server.name}"
     end.join("\n")
     event.respond "I'm in these servers:\n#{server_names}"
+  end
+
+  def may_be_command?(event)
+    event.content.start_with?(at_sign_to_me)
+  end
+
+  def at_sign_to_me
+    "<@#{@bot.profile.id}>"
   end
 end
