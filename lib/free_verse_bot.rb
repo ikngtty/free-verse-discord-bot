@@ -13,6 +13,8 @@ class FreeVerseBot
   end
 
   def handle_message_event(event)
+    return if event.author.bot_account?
+
     author_name = event.author.username
     rule = @get_rule.call
     basho = @get_basho.call(rule: rule)
