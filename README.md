@@ -98,6 +98,9 @@ bundle exec rubocop
 
 ## License
 
+Files in this repository without [redistribution](redistribution) directory
+are under the MIT license (the [LICENSE](LICENSE) file).
+
 ### MeCab
 
 This repository includes [MeCab][mecab] programs.
