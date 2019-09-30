@@ -1,6 +1,6 @@
 # 俳句じゃないやつ検出bot
 
-A Discord bot to detect free verses. (WIP)
+A Discord bot to detect free verses.
 
 ## Usage
 
@@ -73,6 +73,8 @@ heroku config:set DEBUG_MODE=$DEBUG_MODE
 git push heroku master
 heroku ps:scale bot=1
 ```
+
+or use GitHub Integration.
 
 ### Test
 
