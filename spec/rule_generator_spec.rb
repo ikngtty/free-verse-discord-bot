@@ -27,6 +27,10 @@ RSpec.describe RuleGenerator do
   let(:get_today) { object_double(Date.method(:new), call: today) }
   let(:today) { Date.new(1982, 12, 6) }
 
+  def go_to_tommorow
+    allow(get_today).to receive_messages(call: today + 1)
+  end
+
   describe '#call' do
     it 'generates a rule which uses get_random for each length' do
       expect(generator.call).to eq [1, 2, 3]
@@ -40,14 +44,14 @@ RSpec.describe RuleGenerator do
 
     it 'changes the rule at the different day' do
       first = generator.call
-      allow(get_today).to receive_messages(call: today + 1)
+      go_to_tommorow
       second = generator.call
       expect(second).not_to eq first
     end
 
     it 'does not change the rule at the same day after the change' do
       generator.call
-      allow(get_today).to receive_messages(call: today + 1)
+      go_to_tommorow
       second = generator.call
       third = generator.call
       expect(third).to eq second
