@@ -20,7 +20,7 @@ bot = Discordrb::Bot.new token: token
 mecab = Natto::MeCab.new
 free_verse_bot = FreeVerseBot.new(
   discordrb_bot: bot,
-  get_rule: RuleGenerator.new,
+  get_rule: RuleGenerator.new(method(:rand)),
   get_ikku_reviewer: Ikku::Reviewer.method(:new),
   mecab: mecab,
   debug_mode: debug_mode
