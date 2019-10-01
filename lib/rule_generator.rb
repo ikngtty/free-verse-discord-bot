@@ -19,6 +19,7 @@ class RuleGenerator
     # * first call (@last_called_date is nil)
     # * first call in a different day (@last_called_date is not nil)
     new_rule = ranges.map { |range| @get_rand.call(range) }
+    puts "New Rule! #{new_rule}"
     @last_rule = new_rule
     @last_called_date = today
     new_rule

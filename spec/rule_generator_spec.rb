@@ -61,5 +61,20 @@ RSpec.describe RuleGenerator do
       get_random.current_index = 11
       expect(generator.call).to eq [10, 10, 10]
     end
+
+    it 'outputs a log when a new rule is created' do
+      expect { generator.call }.to output("New Rule! [1, 2, 3]\n").to_stdout
+    end
+
+    it 'does not output a log when an old rule is reused' do
+      generator.call
+      expect { generator.call }.not_to output(/New Rule/).to_stdout
+    end
+
+    it 'outputs a log when an old rule is updated' do
+      generator.call
+      go_to_tommorow
+      expect { generator.call }.to output("New Rule! [4, 5, 6]\n").to_stdout
+    end
   end
 end
