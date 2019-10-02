@@ -25,7 +25,6 @@ class FreeVerseBot
   private
 
   def detect(event)
-    author_name = event.author.username
     rule = @get_rule.call
     basho = @get_basho.call(rule: rule)
     songs = basho.search(event.content)
@@ -34,17 +33,9 @@ class FreeVerseBot
         phrase.map(&:to_s).join
       end
       event.respond <<~EOD
-        ┏━━━━━━━━━━━　**本日の一句**　━━━━━━━━━━━
-        ┃
-        ┃　　#{verses[0]}
-        ┃
-        ┃　　　　#{verses[1]}
-        ┃
-        ┃　　　　　　#{verses[2]}
-        ┃
-        ┃　　　　　　　　　　　　　　　　　　詠み手：#{author_name}
-        ┃
-        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        > #{verses[0]}
+        > #{verses[1]}
+        > #{verses[2]}
       EOD
     end
   end
