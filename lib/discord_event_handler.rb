@@ -37,7 +37,7 @@ class DiscordEventHandler
       elsif content.start_with?(info_prefix)
         @bot.info_command
       else
-        []
+        @bot.unknown_command
       end
 
     result_messages.each { |result| event.respond(result) }

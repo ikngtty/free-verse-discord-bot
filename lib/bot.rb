@@ -37,9 +37,9 @@ class Bot
   end
 
   def info_command
-    messages = []
-    return messages unless @debug_mode
+    return ['そう簡単に情報を渡すわけにはいかない。'] unless @debug_mode
 
+    messages = []
     messages << "The current time is: #{DateTime.now}"
     messages << "The current rule is: #{@get_rule.call}"
 
@@ -49,5 +49,9 @@ class Bot
     messages << "I'm in these servers:\n#{server_names}"
 
     messages
+  end
+
+  def unknown_command
+    ['ちょっと何言ってるか分かんないですｗ']
   end
 end
