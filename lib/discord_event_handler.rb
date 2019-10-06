@@ -12,28 +12,35 @@ class DiscordEventHandler
     if may_be_command?(event)
       do_command(event)
     else
-      message = event.content
-      respond_func = event.method(:respond)
-      @bot.detect(message, respond_func)
+      detect(event)
     end
   end
 
   private
 
-  def do_command(event)
-    content = event.content
-    respond_func = event.method(:respond)
+  def detect(event)
+    @bot.detect(event.content).each do |result_message|
+      event.respond(result_message)
+    end
+  end
 
+  def do_command(event)
     command_prefix_format = "#{at_sign_to_me} %s"
     mecab_prefix = format(command_prefix_format, 'mecab')
     info_prefix = format(command_prefix_format, 'info')
 
-    if content.start_with?(mecab_prefix)
-      message = content.delete_prefix(mecab_prefix).lstrip
-      @bot.mecab_command(message, respond_func)
-    elsif content.start_with?(info_prefix)
-      @bot.info_command(respond_func)
-    end
+    content = event.content
+    result_messages =
+      if content.start_with?(mecab_prefix)
+        message = content.delete_prefix(mecab_prefix).lstrip
+        @bot.mecab_command(message)
+      elsif content.start_with?(info_prefix)
+        @bot.info_command
+      else
+        []
+      end
+
+    result_messages.each { |result| event.respond(result) }
   end
 
   def may_be_command?(event)

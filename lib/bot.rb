@@ -12,7 +12,9 @@ class Bot
     @debug_mode = args[:debug_mode]
   end
 
-  def detect(message, respond_func)
+  def detect(message)
+    result_messages = []
+
     rule = @get_rule.call
     basho = @get_basho.call(rule: rule)
     songs = basho.search(message)
@@ -20,27 +22,32 @@ class Bot
       verses = song.phrases.map do |phrase|
         phrase.map(&:to_s).join
       end
-      respond_func.call <<~EOD
+      result_messages << <<~EOD
         > #{verses[0]}
         > #{verses[1]}
         > #{verses[2]}
       EOD
     end
+
+    result_messages
   end
 
-  def mecab_command(message, respond_func)
-    respond_func.call("```\n#{@mecab.parse(message)}\n```")
+  def mecab_command(message)
+    ["```\n#{@mecab.parse(message)}\n```"]
   end
 
-  def info_command(respond_func)
-    return unless @debug_mode
+  def info_command
+    messages = []
+    return messages unless @debug_mode
 
-    respond_func.call("The current time is: #{DateTime.now}")
-    respond_func.call("The current rule is: #{@get_rule.call}")
+    messages << "The current time is: #{DateTime.now}"
+    messages << "The current rule is: #{@get_rule.call}"
 
     server_names = @bot_lib.servers.map do |id, server|
       "<#{id}> #{server.name}"
     end.join("\n")
-    respond_func.call("I'm in these servers:\n#{server_names}")
+    messages << "I'm in these servers:\n#{server_names}"
+
+    messages
   end
 end
