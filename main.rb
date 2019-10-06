@@ -4,6 +4,7 @@ require 'discordrb'
 require 'ikku'
 require 'natto'
 require_relative './lib/bot'
+require_relative './lib/discord_event_handler'
 require_relative './lib/rule_generator'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
@@ -25,11 +26,12 @@ bot = Bot.new(
   mecab: mecab,
   debug_mode: debug_mode
 )
+handler = DiscordEventHandler.new(bot, bot_lib)
 
 bot_lib.ready do
   bot_lib.game = '俳句じゃないやつ検出'
 end
 
-bot_lib.message(&bot.method(:handle_message_event))
+bot_lib.message(&handler.method(:handle_message_event))
 
 bot_lib.run
