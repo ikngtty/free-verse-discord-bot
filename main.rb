@@ -3,7 +3,7 @@
 require 'discordrb'
 require 'ikku'
 require 'natto'
-require_relative './lib/free_verse_bot'
+require_relative './lib/bot'
 require_relative './lib/rule_generator'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
@@ -16,20 +16,20 @@ end
 ENV_DEBUG_MODE = 'DEBUG_MODE'
 debug_mode = %w[1 true].member? ENV[ENV_DEBUG_MODE]
 
-bot = Discordrb::Bot.new token: token
+bot_lib = Discordrb::Bot.new token: token
 mecab = Natto::MeCab.new
-free_verse_bot = FreeVerseBot.new(
-  discordrb_bot: bot,
+bot = Bot.new(
+  discordrb_bot: bot_lib,
   get_rule: RuleGenerator.new(method(:rand), Date.method(:today)),
   get_ikku_reviewer: Ikku::Reviewer.method(:new),
   mecab: mecab,
   debug_mode: debug_mode
 )
 
-bot.ready do
-  bot.game = '俳句じゃないやつ検出'
+bot_lib.ready do
+  bot_lib.game = '俳句じゃないやつ検出'
 end
 
-bot.message(&free_verse_bot.method(:handle_message_event))
+bot_lib.message(&bot.method(:handle_message_event))
 
-bot.run
+bot_lib.run

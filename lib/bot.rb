@@ -3,9 +3,9 @@
 # NOTE: "Ikku::Reviewer" is so long and "reviewr" is so ambiguous
 # that we call it "basho", named after "Matsuo Basho".
 
-class FreeVerseBot
+class Bot
   def initialize(args)
-    @bot = args[:discordrb_bot]
+    @bot_lib = args[:discordrb_bot]
     @get_rule = args[:get_rule]
     @get_basho = args[:get_ikku_reviewer]
     @mecab = args[:mecab]
@@ -61,7 +61,7 @@ class FreeVerseBot
     event.respond "The current time is: #{DateTime.now}"
     event.respond "The current rule is: #{@get_rule.call}"
 
-    server_names = @bot.servers.map do |id, server|
+    server_names = @bot_lib.servers.map do |id, server|
       "<#{id}> #{server.name}"
     end.join("\n")
     event.respond "I'm in these servers:\n#{server_names}"
@@ -72,6 +72,6 @@ class FreeVerseBot
   end
 
   def at_sign_to_me
-    "<@#{@bot.profile.id}>"
+    "<@#{@bot_lib.profile.id}>"
   end
 end
