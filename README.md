@@ -81,7 +81,7 @@ or use GitHub Integration.
 #### with Docker
 
 ```console
-docker run --name freeverse_test freeverse rspec
+docker run --name freeverse_test ikngtty/freeverse rspec
 ```
 
 #### in Local

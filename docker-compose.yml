@@ -6,4 +6,4 @@ services:
     environment:
       - DISCORD_BOT_TOKEN
       - DEBUG_MODE
-    image: freeverse
+    image: ikngtty/freeverse
