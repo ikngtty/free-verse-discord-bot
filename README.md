@@ -42,7 +42,7 @@ Ruby's version is specified by `/.Dockerfile`.
 
 ```console
 # prepare and run
-./run_docker.sh
+docker-compose up -d --build
 ```
 
 #### in Local
@@ -81,7 +81,7 @@ or use GitHub Integration.
 #### with Docker
 
 ```console
-./run_docker_as_test.sh
+docker run --name freeverse_test freeverse rspec
 ```
 
 #### in Local
