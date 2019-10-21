@@ -2,7 +2,7 @@ version: "3.7"
 services:
   bot:
     build: .
-    container_name: freeverse
+    container_name: freeverse_bot
     environment:
       - DISCORD_BOT_TOKEN
       - DEBUG_MODE
