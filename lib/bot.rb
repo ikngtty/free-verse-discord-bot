@@ -29,7 +29,7 @@ class Bot
       EOD
     end
 
-    result_messages
+    result_messages.uniq
   end
 
   def mecab_command(message)
