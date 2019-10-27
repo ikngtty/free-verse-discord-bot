@@ -59,8 +59,11 @@ Ruby's version is specified by `/.ruby-version`.
 For running, these are required:
 
 *   MeCab
-    *   in [redistribution](redistribution) directory
+    *   In [redistribution](redistribution) directory.
 *   [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd)
+*   Redis
+    *   It should be running.
+    *   The `REDIS_URL` environment variable should be set.
 
 ```console
 # prepare

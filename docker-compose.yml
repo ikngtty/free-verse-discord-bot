@@ -6,4 +6,12 @@ services:
     environment:
       - DISCORD_BOT_TOKEN
       - DEBUG_MODE
+      - REDIS_URL=redis://redis
     image: ikngtty/freeverse
+  redis:
+    container_name: freeverse_redis
+    image: redis:4-alpine
+    volumes:
+      - freeverse_redis:/data
+volumes:
+  freeverse_redis:

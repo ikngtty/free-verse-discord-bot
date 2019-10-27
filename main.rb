@@ -4,10 +4,11 @@ require 'discordrb'
 require 'dotenv/load'
 require 'ikku'
 require 'natto'
+require 'redis'
 require_relative './lib/bot'
 require_relative './lib/discord_event_handler'
 require_relative './lib/verse_rule_generator'
-require_relative './lib/verse_rule_repository_memory'
+require_relative './lib/verse_rule_repository_redis'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
 token = ENV[ENV_TOKEN]
@@ -19,6 +20,12 @@ end
 ENV_DEBUG_MODE = 'DEBUG_MODE'
 debug_mode = %w[1 true].member? ENV[ENV_DEBUG_MODE]
 
+ENV_REDIS_URL = 'REDIS_URL'
+unless ENV[ENV_REDIS_URL]
+  puts "ERROR! The environment variable #{ENV_REDIS_URL} is not defined."
+  exit 1
+end
+
 get_rand = method(:rand)
 get_today = Date.method(:today)
 mecab = Natto::MeCab.new
@@ -26,7 +33,7 @@ get_ikku_reviewer = Ikku::Reviewer.method(:new)
 bot_lib = Discordrb::Bot.new token: token
 
 generate_rule = VerseRuleGenerator.new(get_rand, get_today)
-rule_repository = VerseRuleRepositoryMemory.new
+rule_repository = VerseRuleRepositoryRedis.new
 bot = Bot.new(
   debug_mode: debug_mode,
   generate_rule: generate_rule,
