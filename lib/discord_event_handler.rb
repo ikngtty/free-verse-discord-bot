@@ -48,6 +48,6 @@ class DiscordEventHandler
   end
 
   def at_sign_to_me
-    "<@#{@bot_lib.profile.id}>"
+    "<@!#{@bot_lib.profile.id}>"
   end
 end
