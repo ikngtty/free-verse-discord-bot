@@ -9,8 +9,12 @@ class DiscordEventHandler
   def handle_message_event(event)
     return if event.author.bot_account?
 
-    if may_be_command?(event)
-      do_command(event)
+    match = command_regexp.match(event.content)
+    if match
+      captures = match.named_captures
+      command = captures['command']
+      args_text = captures['args']
+      do_command(event, command, args_text)
     else
       detect(event)
     end
@@ -24,17 +28,12 @@ class DiscordEventHandler
     end
   end
 
-  def do_command(event)
-    command_prefix_format = "#{at_sign_to_me} %s"
-    mecab_prefix = format(command_prefix_format, 'mecab')
-    info_prefix = format(command_prefix_format, 'info')
-
-    content = event.content
+  def do_command(event, command, args_text)
     result_messages =
-      if content.start_with?(mecab_prefix)
-        message = content.delete_prefix(mecab_prefix).lstrip
-        @bot.mecab_command(message)
-      elsif content.start_with?(info_prefix)
+      case command
+      when 'mecab'
+        @bot.mecab_command(args_text)
+      when 'info'
         @bot.info_command
       else
         @bot.unknown_command
@@ -43,11 +42,8 @@ class DiscordEventHandler
     result_messages.each { |result| event.respond(result) }
   end
 
-  def may_be_command?(event)
-    event.content.start_with?(at_sign_to_me)
-  end
-
-  def at_sign_to_me
-    "<@!#{@bot_lib.profile.id}>"
+  def command_regexp
+    id = @bot_lib.profile.id
+    /\A (?: \< @#{id} \> | \< @!#{id} \>) \s* (?<command> \S+) \s* (?<args> .*) \Z/mx
   end
 end
