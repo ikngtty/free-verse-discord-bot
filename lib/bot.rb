@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# NOTE: "Ikku::Reviewer" is so long and "reviewr" is so ambiguous
+# NOTE: "Ikku::Reviewer" is so long and "reviewer" is so ambiguous
 # that we call it "basho", named after "Matsuo Basho".
 
 class Bot
