@@ -1,0 +1,7 @@
+name: Run RSpec
+description: Run RSpec
+runs:
+  using: docker
+  image: ../../../Dockerfile
+  args:
+    - rspec
