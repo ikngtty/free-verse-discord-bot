@@ -10,7 +10,7 @@ class GetRandomStub
   attr_accessor :current_index
 
   def initialize
-    @current_index = 0
+    @current_index = 1
   end
 
   def call(range)
