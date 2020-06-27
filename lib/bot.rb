@@ -6,7 +6,7 @@
 class Bot
   def initialize(args)
     @bot_lib = args[:discordrb_bot]
-    @get_rule = args[:get_rule]
+    @rule_holder = args[:rule_holder]
     @get_basho = args[:get_ikku_reviewer]
     @mecab = args[:mecab]
     @debug_mode = args[:debug_mode]
@@ -15,8 +15,8 @@ class Bot
   def detect(message)
     result_messages = []
 
-    rule = @get_rule.call
-    basho = @get_basho.call(rule: rule)
+    rule_values = @rule_holder.current.values
+    basho = @get_basho.call(rule: rule_values)
     songs = basho.search(message)
     songs.each do |song|
       verses = song.phrases.map do |phrase|
@@ -41,7 +41,7 @@ class Bot
 
     messages = []
     messages << "The current time is: #{DateTime.now}"
-    messages << "The current rule is: #{@get_rule.call}"
+    messages << "The current rule is: #{@rule_holder.current}"
 
     server_names = @bot_lib.servers.map do |id, server|
       "<#{id}> #{server.name}"
