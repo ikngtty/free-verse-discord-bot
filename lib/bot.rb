@@ -8,15 +8,16 @@ require_relative 'verse_rule_updater'
 class Bot
   def initialize(args)
     @bot_lib = args[:discordrb_bot]
-    @rule_repository = args[:rule_repository]
+    @debug_mode = args[:debug_mode]
     generate_rule = args[:generate_rule]
+    @get_basho = args[:get_ikku_reviewer]
     get_today = args[:get_today]
+    @mecab = args[:mecab]
+    @rule_repository = args[:rule_repository]
+
     @rule_updater = VerseRuleUpdater.new(
       @rule_repository, generate_rule, get_today
     )
-    @get_basho = args[:get_ikku_reviewer]
-    @mecab = args[:mecab]
-    @debug_mode = args[:debug_mode]
   end
 
   def detect(message)

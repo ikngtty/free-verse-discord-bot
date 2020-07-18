@@ -23,16 +23,17 @@ get_today = Date.method(:today)
 mecab = Natto::MeCab.new
 get_ikku_reviewer = Ikku::Reviewer.method(:new)
 bot_lib = Discordrb::Bot.new token: token
+
 generate_rule = VerseRuleGenerator.new(get_rand, get_today)
 rule_repository = VerseRuleRepositoryMemory.new
 bot = Bot.new(
   discordrb_bot: bot_lib,
-  rule_repository: rule_repository,
+  debug_mode: debug_mode,
   generate_rule: generate_rule,
-  get_today: get_today,
   get_ikku_reviewer: get_ikku_reviewer,
+  get_today: get_today,
   mecab: mecab,
-  debug_mode: debug_mode
+  rule_repository: rule_repository
 )
 handler = DiscordEventHandler.new(bot, bot_lib)
 
