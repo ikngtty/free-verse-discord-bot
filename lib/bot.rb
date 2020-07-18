@@ -3,19 +3,29 @@
 # NOTE: "Ikku::Reviewer" is so long and "reviewer" is so ambiguous
 # that we call it "basho", named after "Matsuo Basho".
 
+require_relative 'verse_rule_updater'
+
 class Bot
   def initialize(args)
     @bot_lib = args[:discordrb_bot]
-    @rule_holder = args[:rule_holder]
-    @get_basho = args[:get_ikku_reviewer]
-    @mecab = args[:mecab]
     @debug_mode = args[:debug_mode]
+    generate_rule = args[:generate_rule]
+    @get_basho = args[:get_ikku_reviewer]
+    get_today = args[:get_today]
+    @mecab = args[:mecab]
+    @rule_repository = args[:rule_repository]
+
+    @rule_updater = VerseRuleUpdater.new(
+      @rule_repository, generate_rule, get_today
+    )
   end
 
   def detect(message)
+    @rule_updater.exec_as_needed
+
     result_messages = []
 
-    rule_values = @rule_holder.current.values
+    rule_values = @rule_repository.current.values
     basho = @get_basho.call(rule: rule_values)
     songs = basho.search(message)
     songs.each do |song|
@@ -41,7 +51,7 @@ class Bot
 
     messages = []
     messages << "The current time is: #{DateTime.now}"
-    messages << "The current rule is: #{@rule_holder.current}"
+    messages << "The current rule is: #{@rule_repository.current}"
 
     server_names = @bot_lib.servers.map do |id, server|
       "<#{id}> #{server.name}"

@@ -6,7 +6,7 @@ require 'natto'
 require_relative './lib/bot'
 require_relative './lib/discord_event_handler'
 require_relative './lib/verse_rule_generator'
-require_relative './lib/verse_rule_holder'
+require_relative './lib/verse_rule_repository_memory'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
 token = ENV[ENV_TOKEN]
@@ -23,14 +23,17 @@ get_today = Date.method(:today)
 mecab = Natto::MeCab.new
 get_ikku_reviewer = Ikku::Reviewer.method(:new)
 bot_lib = Discordrb::Bot.new token: token
+
 generate_rule = VerseRuleGenerator.new(get_rand, get_today)
-rule_holder = VerseRuleHolder.new(generate_rule, get_today)
+rule_repository = VerseRuleRepositoryMemory.new
 bot = Bot.new(
   discordrb_bot: bot_lib,
-  rule_holder: rule_holder,
+  debug_mode: debug_mode,
+  generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,
+  get_today: get_today,
   mecab: mecab,
-  debug_mode: debug_mode
+  rule_repository: rule_repository
 )
 handler = DiscordEventHandler.new(bot, bot_lib)
 
