@@ -7,7 +7,6 @@ require_relative 'verse_rule_updater'
 
 class Bot
   def initialize(args)
-    @bot_lib = args[:discordrb_bot]
     @debug_mode = args[:debug_mode]
     generate_rule = args[:generate_rule]
     @get_basho = args[:get_ikku_reviewer]
@@ -52,11 +51,6 @@ class Bot
     messages = []
     messages << "The current time is: #{DateTime.now}"
     messages << "The current rule is: #{@rule_repository.current}"
-
-    server_names = @bot_lib.servers.map do |id, server|
-      "<#{id}> #{server.name}"
-    end.join("\n")
-    messages << "I'm in these servers:\n#{server_names}"
 
     messages
   end

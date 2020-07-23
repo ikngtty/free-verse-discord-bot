@@ -28,7 +28,6 @@ bot_lib = Discordrb::Bot.new token: token
 generate_rule = VerseRuleGenerator.new(get_rand, get_today)
 rule_repository = VerseRuleRepositoryMemory.new
 bot = Bot.new(
-  discordrb_bot: bot_lib,
   debug_mode: debug_mode,
   generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,

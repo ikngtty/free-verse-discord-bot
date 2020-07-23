@@ -105,6 +105,15 @@ bundle exec rspec
 bundle exec rubocop
 ```
 
+### Inspect
+
+Enter this command in Local and we can get our bot's information through
+Discord REST API.
+
+```console
+bundle exec ruby script/inspect.rb
+```
+
 ## License
 
 Files in this repository without [redistribution](redistribution) directory
