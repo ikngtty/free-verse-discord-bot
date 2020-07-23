@@ -26,17 +26,24 @@ Commands:
 
 ### Requirements
 
-When running or deploying this bot, set these environment variables.
+When running or deploying this bot, you need to create `.env` file in
+the project directory by copying [`.env.template`](.env.template) file
+or to set the environment variables.
 
-*   `DISCORD_BOT_TOKEN`
-    *   Required
-*   `DEBUG_MODE`
-    *   Not required
-    *   To turn debug mode on, set `1` or `true`.
+*   in Local
+    *   set the env vars -> they are used (`.env` file is ignored)
+    *   prepare `.env` file -> they are loaded by `dotenv` gem
+*   with Docker Compose
+    *   set the env vars -> they are passed to the container by Docker Compose
+        and are used there (`.env` file is ignored)
+    *   prepare `.env` file -> they are loaded by Docker Compose and are used
+        in the container
+*   heroku
+    *   set the env vars -> they are used
 
 ### Run
 
-#### with Docker
+#### with Docker Compose
 
 Ruby's version is specified by `/.Dockerfile`.
 

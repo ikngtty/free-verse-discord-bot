@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'discordrb'
+require 'dotenv/load'
 require 'ikku'
 require 'natto'
 require_relative './lib/bot'

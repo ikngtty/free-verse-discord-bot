@@ -14,6 +14,7 @@ GEM
       rest-client (>= 2.1.0.rc1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
     event_emitter (0.2.6)
     ffi (1.13.1)
     http-accept (1.7.0)
@@ -89,6 +90,7 @@ PLATFORMS
 
 DEPENDENCIES
   discordrb
+  dotenv
   ikku
   rspec
   rubocop
