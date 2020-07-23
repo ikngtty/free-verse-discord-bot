@@ -36,7 +36,8 @@ COPY Gemfile Gemfile.lock ./
 RUN gem update && gem cleanup
 # NOTE: throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1 \
-  && bundle install --without dev
+  && bundle config --global without dev \
+  && bundle install
 
 ## Execute
 COPY main.rb ./
