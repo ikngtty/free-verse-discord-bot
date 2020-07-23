@@ -8,8 +8,13 @@ class DiscordEventHandler
 
   def handle_message_event(event)
     return if event.author.bot_account?
+    return if event.server.nil?
 
-    match = command_regexp.match(event.content)
+    member = event.server.member(@bot_lib.profile.id)
+    return if member.nil?
+
+    managed_role = member.roles.find(&:managed?)
+    match = command_regexp(managed_role.id).match(event.content)
     if match
       captures = match.named_captures
       command = captures['command']
@@ -42,8 +47,8 @@ class DiscordEventHandler
     result_messages.each { |result| event.respond(result) }
   end
 
-  def command_regexp
+  def command_regexp(managed_role_id)
     id = @bot_lib.profile.id
-    /\A (?: \< @#{id} \> | \< @!#{id} \>) \s* (?<command> \S+) \s* (?<args> .*) \Z/mx
+    /\A (?: \< @#{id} \> | \< @!#{id} \> | \< @&#{managed_role_id} \>) \s* (?<command> \S+) \s* (?<args> .*) \Z/mx
   end
 end
