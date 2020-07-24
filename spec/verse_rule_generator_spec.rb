@@ -14,7 +14,7 @@ class GetRandomStub
   end
 
   def call(range)
-    result = range.take(@current_index + 1).last
+    result = range.cycle.take(@current_index + 1).last
     @current_index += 1
     result
   end
@@ -38,8 +38,8 @@ RSpec.describe VerseRuleGenerator do
     end
 
     it 'generates a verse rule which each length cannot be over 10' do
-      get_random.current_index = 11
-      expect(generator.values).to eq [10, 10, 10]
+      get_random.current_index = 9
+      expect(generator.values).to eq [10, 1, 2]
     end
   end
 end
