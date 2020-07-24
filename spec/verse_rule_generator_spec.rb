@@ -4,26 +4,13 @@ require 'date'
 
 require 'rspec'
 
+require_relative 'fake/get_random'
 require_relative '../lib/verse_rule_generator'
-
-class GetRandomStub
-  attr_accessor :current_index
-
-  def initialize
-    @current_index = 0
-  end
-
-  def call(range)
-    result = range.cycle.take(@current_index + 1).last
-    @current_index += 1
-    result
-  end
-end
 
 RSpec.describe VerseRuleGenerator do
   subject(:generator) { described_class.new(get_random, get_today).call }
 
-  let(:get_random) { GetRandomStub.new }
+  let(:get_random) { Fake::GetRandom.new }
   let(:get_today) { object_double(Date.method(:new), call: today) }
   let(:today) { Date.new(1982, 12, 6) }
 
