@@ -59,8 +59,11 @@ Ruby's version is specified by `/.ruby-version`.
 For running, these are required:
 
 *   MeCab
-    *   in [redistribution](redistribution) directory
+    *   In [redistribution](redistribution) directory.
 *   [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd)
+*   Redis
+    *   It should be running.
+    *   The `REDIS_URL` environment variable should be set.
 
 ```console
 # prepare
@@ -78,8 +81,16 @@ heroku stack:set container
 heroku config:set DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
 heroku config:set DEBUG_MODE=$DEBUG_MODE
 git push heroku master
+heroku addons:create heroku-redis:hobby-dev # *1
 heroku ps:scale bot=1
 ```
+
+\*1: This necessity is declared in `setup` steps in the `heroku.yml`
+manifest file, but by
+[this document](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml#creating-your-app-from-setup),
+automatic installations triggerd by it seem to be a beta function. So we should
+install the add-on manually (or use the beta function by following the steps
+in the document).
 
 or use GitHub Integration.
 

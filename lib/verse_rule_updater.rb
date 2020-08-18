@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'verse_rule_repository_memory'
-
 class VerseRuleUpdater
   def initialize(repository, generate_rule, get_today)
     @repository = repository

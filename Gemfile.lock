@@ -36,6 +36,7 @@ GEM
     rainbow (3.0.0)
     rbnacl (3.4.0)
       ffi
+    redis (4.2.1)
     regexp_parser (1.7.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -92,6 +93,7 @@ DEPENDENCIES
   discordrb
   dotenv
   ikku
+  redis
   rspec
   rubocop
   rubocop-performance

@@ -4,15 +4,15 @@ require 'date'
 
 require 'rspec'
 
+require_relative 'fake/verse_rule_repository_memory'
 require_relative '../lib/verse_rule'
 require_relative '../lib/verse_rule_generator'
-require_relative '../lib/verse_rule_repository_memory'
 require_relative '../lib/verse_rule_updater'
 
 RSpec.describe VerseRuleUpdater do
   subject(:updater) { described_class.new(repository, generator, get_today) }
 
-  let(:repository) { VerseRuleRepositoryMemory.new }
+  let(:repository) { Fake::VerseRuleRepositoryMemory.new }
 
   let(:get_today) { object_double(Date.method(:new), call: today) }
   let(:today) { Date.new(1982, 12, 6) }
