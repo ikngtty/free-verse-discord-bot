@@ -7,7 +7,6 @@ require_relative 'verse_rule_updater'
 
 class Bot
   def initialize(args)
-    @debug_mode = args[:debug_mode]
     generate_rule = args[:generate_rule]
     @get_basho = args[:get_ikku_reviewer]
     get_today = args[:get_today]

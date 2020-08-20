@@ -76,7 +76,6 @@ bundle exec ruby main.rb
 heroku create free-verse-discord-bot
 heroku stack:set container
 heroku config:set DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
-heroku config:set DEBUG_MODE=$DEBUG_MODE
 git push heroku master
 heroku addons:create heroku-redis:hobby-dev # *1
 heroku ps:scale bot=1

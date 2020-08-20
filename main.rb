@@ -17,9 +17,6 @@ unless token
   exit 1
 end
 
-ENV_DEBUG_MODE = 'DEBUG_MODE'
-debug_mode = %w[1 true].member? ENV[ENV_DEBUG_MODE]
-
 ENV_REDIS_URL = 'REDIS_URL'
 unless ENV[ENV_REDIS_URL]
   puts "ERROR! The environment variable #{ENV_REDIS_URL} is not defined."
@@ -35,7 +32,6 @@ bot_lib = Discordrb::Bot.new token: token
 generate_rule = VerseRuleGenerator.new(get_rand, get_today)
 rule_repository = VerseRuleRepositoryRedis.new
 bot = Bot.new(
-  debug_mode: debug_mode,
   generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,
   get_today: get_today,

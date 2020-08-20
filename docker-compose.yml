@@ -5,7 +5,6 @@ services:
     container_name: freeverse_bot
     environment:
       - DISCORD_BOT_TOKEN
-      - DEBUG_MODE
       - REDIS_URL=redis://redis
     image: ikngtty/freeverse
   redis:
