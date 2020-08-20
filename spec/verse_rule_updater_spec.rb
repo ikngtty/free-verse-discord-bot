@@ -14,12 +14,6 @@ RSpec.describe VerseRuleUpdater do
 
   let(:repository) { Fake::VerseRuleRepositoryMemory.new }
 
-  let(:get_today) { object_double(Date.method(:new), call: today) }
-  let(:today) { Date.new(1982, 12, 6) }
-  def go_to_tommorow
-    allow(get_today).to receive_messages(call: today + 1)
-  end
-
   let(:generator) do
     obj = instance_double(VerseRuleGenerator)
     allow(obj).to receive(:call).and_return(rule1, rule2, rule3)
@@ -28,23 +22,34 @@ RSpec.describe VerseRuleUpdater do
   let(:rule1) do
     VerseRule.new(
       values: [1, 1, 1],
-      created_at: today
+      created_at: BASE_DAY
       # TODO: This is incorrect when the generator is called as unexpected.
     )
   end
   let(:rule2) do
     VerseRule.new(
       values: [2, 2, 2],
-      created_at: today + 1
+      created_at: BASE_DAY + 1
       # TODO: This is incorrect when the generator is called as unexpected.
     )
   end
   let(:rule3) do
     VerseRule.new(
       values: [3, 3, 3],
-      created_at: today + 2
+      created_at: BASE_DAY + 2
       # TODO: This is incorrect when the generator is called as unexpected.
     )
+  end
+
+  let(:get_today) { -> { @today } }
+
+  def go_to_tommorow
+    @today += 1
+  end
+
+  before do
+    stub_const('BASE_DAY', Date.new(1982, 12, 6))
+    @today = BASE_DAY
   end
 
   describe '#exec_as_needed' do
