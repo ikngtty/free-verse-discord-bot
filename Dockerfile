@@ -9,11 +9,11 @@ RUN tar zxf mecab-0.996.tar.gz \
   && rm mecab-0.996.tar.gz
 
 WORKDIR /usr/src/mecab/mecab-0.996
-RUN ./configure
-RUN make
-RUN make check
-RUN make install
-RUN ldconfig
+RUN ./configure \
+  && make \
+  && make check \
+  && make install \
+  && ldconfig
 
 # NOTE: Need not to install MeCab's IPA dictionary data, because
 # mecab-ipadic-NEologd includes it. Instead, need to create the directory
