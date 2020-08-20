@@ -38,8 +38,6 @@ class DiscordEventHandler
       case command
       when 'mecab'
         @bot.mecab_command(args_text)
-      when 'info'
-        @bot.info_command
       else
         @bot.unknown_command
       end

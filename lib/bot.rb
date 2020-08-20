@@ -45,16 +45,6 @@ class Bot
     ["```\n#{@mecab.parse(message)}\n```"]
   end
 
-  def info_command
-    return ['そう簡単に情報を渡すわけにはいかない。'] unless @debug_mode
-
-    messages = []
-    messages << "The current time is: #{DateTime.now}"
-    messages << "The current rule is: #{@rule_repository.current}"
-
-    messages
-  end
-
   def unknown_command
     ['ちょっと何言ってるか分かんないですｗ']
   end

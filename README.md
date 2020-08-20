@@ -18,9 +18,6 @@ Commands:
 *   `@<bot> mecab <text>`
     *   Shows [MeCab][mecab] result about the specified text
         by a discord message.
-*   `@<bot> info`
-    *   **DEBUG MODE ONLY**
-    *   Shows informations for debugging by discord messages.
 
 ## Development
 
