@@ -120,22 +120,3 @@ Discord REST API.
 ```console
 bundle exec ruby script/inspect.rb
 ```
-
-## License
-
-Files in this repository without [redistribution](redistribution) directory
-are under the MIT license (the [LICENSE](LICENSE) file).
-
-### MeCab
-
-This repository includes [MeCab][mecab] programs.
-
-Source of the main program is
-[redistribution/mecab-0.996.tar.gz](redistribution/mecab-0.996.tar.gz)
-, which is downloaded from
-[here](https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicTFaRUE)
-and is included under the BSD license, which copy is
-[redistribution/mecab-0.996-license](redistribution/mecab-0.996-license)
-.
-
-[mecab]:http://taku910.github.io/mecab/
