@@ -23,13 +23,16 @@ unless ENV[ENV_REDIS_URL]
   exit 1
 end
 
-get_rand = method(:rand)
+get_random = method(:rand)
 get_today = Date.method(:today)
 mecab = Natto::MeCab.new
 get_ikku_reviewer = Ikku::Reviewer.method(:new)
 bot_lib = Discordrb::Bot.new token: token
 
-generate_rule = VerseRuleGenerator.new(get_rand, get_today)
+generate_rule = VerseRuleGenerator.new(
+  get_random: get_random,
+  get_today: get_today
+)
 rule_repository = VerseRuleRepositoryRedis.new
 bot = Bot.new(
   generate_rule: generate_rule,
@@ -38,7 +41,10 @@ bot = Bot.new(
   mecab: mecab,
   rule_repository: rule_repository
 )
-handler = DiscordEventHandler.new(bot, bot_lib)
+handler = DiscordEventHandler.new(
+  bot: bot,
+  discordrb_bot: bot_lib
+)
 
 bot_lib.ready do
   bot_lib.game = '俳句じゃないやつ検出'

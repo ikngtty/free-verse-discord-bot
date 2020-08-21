@@ -14,7 +14,9 @@ class Bot
     @rule_repository = args.fetch(:rule_repository)
 
     @rule_updater = VerseRuleUpdater.new(
-      @rule_repository, generate_rule, get_today
+      repository: @rule_repository,
+      generate_rule: generate_rule,
+      get_today: get_today
     )
   end
 

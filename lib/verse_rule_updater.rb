@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class VerseRuleUpdater
-  def initialize(repository, generate_rule, get_today)
-    @repository = repository
-    @generate_rule = generate_rule
-    @get_today = get_today
+  def initialize(args)
+    @repository = args.fetch(:repository)
+    @generate_rule = args.fetch(:generate_rule)
+    @get_today = args.fetch(:get_today)
   end
 
   def exec_as_needed

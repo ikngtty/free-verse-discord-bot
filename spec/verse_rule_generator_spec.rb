@@ -8,7 +8,9 @@ require_relative 'fake/get_random'
 require_relative '../lib/verse_rule_generator'
 
 RSpec.describe VerseRuleGenerator do
-  subject(:generator) { described_class.new(get_random, get_today).call }
+  subject(:generator) do
+    described_class.new(get_random: get_random, get_today: get_today).call
+  end
 
   let(:get_random) { Fake::GetRandom.new }
   let(:get_today) { object_double(Date.method(:new), call: today) }

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class DiscordEventHandler
-  def initialize(bot, discordrb_bot)
-    @bot = bot
-    @bot_lib = discordrb_bot
+  def initialize(args)
+    @bot = args.fetch(:bot)
+    @bot_lib = args.fetch(:discordrb_bot)
   end
 
   def handle_message_event(event)
