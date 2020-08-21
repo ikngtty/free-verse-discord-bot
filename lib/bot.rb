@@ -7,11 +7,11 @@ require_relative 'verse_rule_updater'
 
 class Bot
   def initialize(args)
-    generate_rule = args[:generate_rule]
-    @get_basho = args[:get_ikku_reviewer]
-    get_today = args[:get_today]
-    @mecab = args[:mecab]
-    @rule_repository = args[:rule_repository]
+    generate_rule = args.fetch(:generate_rule)
+    @get_basho = args.fetch(:get_ikku_reviewer)
+    get_today = args.fetch(:get_today)
+    @mecab = args.fetch(:mecab)
+    @rule_repository = args.fetch(:rule_repository)
 
     @rule_updater = VerseRuleUpdater.new(
       @rule_repository, generate_rule, get_today

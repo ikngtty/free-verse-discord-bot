@@ -11,8 +11,8 @@ class VerseRule
   end
 
   def initialize(args)
-    @values = args[:values]
-    @created_at = args[:created_at]
+    @values = args.fetch(:values)
+    @created_at = args.fetch(:created_at)
   end
 
   def as_json
