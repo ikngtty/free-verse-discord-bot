@@ -8,7 +8,7 @@ require 'rspec'
 require_relative '../shared_context/with_fixed_today'
 require_relative '../../lib/verse_rule/verse_rule'
 
-RSpec.describe VerseRule do
+RSpec.describe VerseRule::VerseRule do
   subject(:rule) { described_class.new(values: [5, 7, 4], created_at: @today) }
 
   include_context 'with fixed today'

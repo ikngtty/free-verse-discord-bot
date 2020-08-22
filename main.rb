@@ -29,11 +29,11 @@ mecab = Natto::MeCab.new
 get_ikku_reviewer = Ikku::Reviewer.method(:new)
 bot_lib = Discordrb::Bot.new token: token
 
-generate_rule = VerseRuleGenerator.new(
+generate_rule = VerseRule::Generator.new(
   get_random: get_random,
   get_today: get_today
 )
-rule_repository = VerseRuleRepositoryRedis.new
+rule_repository = VerseRule::RepositoryRedis.new
 bot = Bot.new(
   generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,

@@ -8,7 +8,7 @@ require_relative '../fake/get_random'
 require_relative '../shared_context/with_fixed_today'
 require_relative '../../lib/verse_rule/generator'
 
-RSpec.describe VerseRuleGenerator do
+RSpec.describe VerseRule::Generator do
   subject(:generator) do
     described_class.new(get_random: get_random, get_today: get_today).call
   end

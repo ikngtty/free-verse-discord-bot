@@ -10,7 +10,7 @@ require_relative '../../lib/verse_rule/generator'
 require_relative '../../lib/verse_rule/updater'
 require_relative '../../lib/verse_rule/verse_rule'
 
-RSpec.describe VerseRuleUpdater do
+RSpec.describe VerseRule::Updater do
   subject(:updater) do
     described_class.new(
       repository: repository,
@@ -21,29 +21,29 @@ RSpec.describe VerseRuleUpdater do
 
   include_context 'with fixed today'
 
-  let(:repository) { Fake::VerseRuleRepositoryMemory.new }
+  let(:repository) { Fake::VerseRule::RepositoryMemory.new }
 
   let(:generate_rule) do
-    obj = instance_double(VerseRuleGenerator)
+    obj = instance_double(VerseRule::Generator)
     allow(obj).to receive(:call).and_return(rule1, rule2, rule3)
     obj
   end
   let(:rule1) do
-    VerseRule.new(
+    VerseRule::VerseRule.new(
       values: [1, 1, 1],
       created_at: BASE_DAY
       # TODO: This is incorrect when the `generate_rule` is called as unexpected.
     )
   end
   let(:rule2) do
-    VerseRule.new(
+    VerseRule::VerseRule.new(
       values: [2, 2, 2],
       created_at: BASE_DAY + 1
       # TODO: This is incorrect when the `generate_rule` is called as unexpected.
     )
   end
   let(:rule3) do
-    VerseRule.new(
+    VerseRule::VerseRule.new(
       values: [3, 3, 3],
       created_at: BASE_DAY + 2
       # TODO: This is incorrect when the `generate_rule` is called as unexpected.

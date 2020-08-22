@@ -13,7 +13,7 @@ class Bot
     @mecab = args.fetch(:mecab)
     @rule_repository = args.fetch(:rule_repository)
 
-    @rule_updater = VerseRuleUpdater.new(
+    @rule_updater = VerseRule::Updater.new(
       repository: @rule_repository,
       generate_rule: generate_rule,
       get_today: get_today
