@@ -7,8 +7,8 @@ require 'natto'
 require 'redis'
 require_relative './lib/bot'
 require_relative './lib/discord_event_handler'
-require_relative './lib/verse_rule_generator'
-require_relative './lib/verse_rule_repository_redis'
+require_relative './lib/verse_rule/generator'
+require_relative './lib/verse_rule/repository_redis'
 
 ENV_TOKEN = 'DISCORD_BOT_TOKEN'
 token = ENV[ENV_TOKEN]

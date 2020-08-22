@@ -4,11 +4,11 @@ require 'date'
 
 require 'rspec'
 
-require_relative 'fake/verse_rule_repository_memory'
-require_relative './shared_context/with_fixed_today'
-require_relative '../lib/verse_rule'
-require_relative '../lib/verse_rule_generator'
-require_relative '../lib/verse_rule_updater'
+require_relative '../fake/verse_rule/repository_memory'
+require_relative '../shared_context/with_fixed_today'
+require_relative '../../lib/verse_rule/generator'
+require_relative '../../lib/verse_rule/updater'
+require_relative '../../lib/verse_rule/verse_rule'
 
 RSpec.describe VerseRuleUpdater do
   subject(:updater) do

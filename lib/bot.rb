@@ -3,7 +3,7 @@
 # NOTE: "Ikku::Reviewer" is so long and "reviewer" is so ambiguous
 # that we call it "basho", named after "Matsuo Basho".
 
-require_relative 'verse_rule_updater'
+require_relative 'verse_rule/updater'
 
 class Bot
   def initialize(args)

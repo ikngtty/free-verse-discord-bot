@@ -4,9 +4,9 @@ require 'date'
 
 require 'rspec'
 
-require_relative 'fake/get_random'
-require_relative 'shared_context/with_fixed_today'
-require_relative '../lib/verse_rule_generator'
+require_relative '../fake/get_random'
+require_relative '../shared_context/with_fixed_today'
+require_relative '../../lib/verse_rule/generator'
 
 RSpec.describe VerseRuleGenerator do
   subject(:generator) do
