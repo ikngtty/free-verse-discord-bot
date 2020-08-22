@@ -74,7 +74,7 @@ RSpec.describe VerseRule::Updater do
       end
 
       it 'does not update the verse rule' do
-        # TODO: This may not fail if the rule is updated to the same value.
+        # HACK: This may not fail if the rule is updated to the same value.
         updater.exec_as_needed
         expect(repository.current).to eq rule1
       end
