@@ -20,7 +20,7 @@ class Bot
     )
   end
 
-  def detect(message)
+  def detect(message, respond)
     @rule_updater.exec_as_needed
 
     result_messages = []
@@ -39,14 +39,16 @@ class Bot
       EOD
     end
 
-    result_messages.uniq
+    result_messages.uniq.each do |result|
+      respond.call(result)
+    end
   end
 
-  def mecab_command(message)
-    ["```\n#{@mecab.parse(message)}\n```"]
+  def mecab_command(message, respond)
+    respond.call("```\n#{@mecab.parse(message)}\n```")
   end
 
-  def unknown_command
-    ['ちょっと何言ってるか分かんないですｗ']
+  def unknown_command(respond)
+    respond.call('ちょっと何言ってるか分かんないですｗ')
   end
 end

@@ -13,37 +13,26 @@ class DiscordEventHandler
     member = event.server.member(@bot_lib.profile.id)
     return if member.nil?
 
+    respond = event.method(:respond)
+
     managed_role = member.roles.find(&:managed?)
     match = command_regexp(managed_role.id).match(event.content)
     if match
       captures = match.named_captures
       command = captures['command']
       args_text = captures['args']
-      do_command(event, command, args_text)
+      case command
+      when 'mecab'
+        @bot.mecab_command(args_text, respond)
+      else
+        @bot.unknown_command(respond)
+      end
     else
-      detect(event)
+      @bot.detect(event.content, respond)
     end
   end
 
   private
-
-  def detect(event)
-    @bot.detect(event.content).each do |result_message|
-      event.respond(result_message)
-    end
-  end
-
-  def do_command(event, command, args_text)
-    result_messages =
-      case command
-      when 'mecab'
-        @bot.mecab_command(args_text)
-      else
-        @bot.unknown_command
-      end
-
-    result_messages.each { |result| event.respond(result) }
-  end
 
   def command_regexp(managed_role_id)
     id = @bot_lib.profile.id
