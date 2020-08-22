@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# NOTE: If too many times called, it uses large memory.
 module Fake
   class GetRandom
     attr_accessor :current_index
