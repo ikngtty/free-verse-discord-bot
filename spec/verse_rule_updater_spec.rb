@@ -5,6 +5,7 @@ require 'date'
 require 'rspec'
 
 require_relative 'fake/verse_rule_repository_memory'
+require_relative './shared_context/with_fixed_today'
 require_relative '../lib/verse_rule'
 require_relative '../lib/verse_rule_generator'
 require_relative '../lib/verse_rule_updater'
@@ -17,6 +18,8 @@ RSpec.describe VerseRuleUpdater do
       get_today: get_today
     )
   end
+
+  include_context 'with fixed today'
 
   let(:repository) { Fake::VerseRuleRepositoryMemory.new }
 
@@ -45,17 +48,6 @@ RSpec.describe VerseRuleUpdater do
       created_at: BASE_DAY + 2
       # TODO: This is incorrect when the `generate_rule` is called as unexpected.
     )
-  end
-
-  let(:get_today) { -> { @today } }
-
-  def go_to_tommorow
-    @today += 1
-  end
-
-  before do
-    stub_const('BASE_DAY', Date.new(1982, 12, 6))
-    @today = BASE_DAY
   end
 
   describe '#exec_as_needed' do

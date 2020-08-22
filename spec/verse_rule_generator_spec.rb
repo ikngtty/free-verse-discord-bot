@@ -5,6 +5,7 @@ require 'date'
 require 'rspec'
 
 require_relative 'fake/get_random'
+require_relative 'shared_context/with_fixed_today'
 require_relative '../lib/verse_rule_generator'
 
 RSpec.describe VerseRuleGenerator do
@@ -12,9 +13,9 @@ RSpec.describe VerseRuleGenerator do
     described_class.new(get_random: get_random, get_today: get_today).call
   end
 
+  include_context 'with fixed today'
+
   let(:get_random) { Fake::GetRandom.new }
-  let(:get_today) { object_double(Date.method(:new), call: today) }
-  let(:today) { Date.new(1982, 12, 6) }
 
   describe '#call' do
     it 'generates a verse rule which property `values` uses `get_random`'\
@@ -23,7 +24,7 @@ RSpec.describe VerseRuleGenerator do
     end
 
     it 'generates a verse rule which property `created_at` uses `get_today`' do
-      expect(generator.created_at).to eq today
+      expect(generator.created_at).to eq @today
     end
 
     it 'generates a verse rule which each length cannot be over 10' do

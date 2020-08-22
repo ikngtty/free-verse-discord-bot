@@ -5,12 +5,13 @@ require 'json'
 
 require 'rspec'
 
+require_relative './shared_context/with_fixed_today'
 require_relative '../lib/verse_rule'
 
 RSpec.describe VerseRule do
-  subject(:rule) { described_class.new(values: [5, 7, 4], created_at: today) }
+  subject(:rule) { described_class.new(values: [5, 7, 4], created_at: @today) }
 
-  let(:today) { Date.new(1982, 12, 6) }
+  include_context 'with fixed today'
 
   it 'can interconvert between object and json text' do
     json = JSON.generate(rule)
