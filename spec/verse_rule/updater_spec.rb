@@ -31,22 +31,19 @@ RSpec.describe VerseRule::Updater do
   let(:rule1) do
     VerseRule::VerseRule.new(
       values: [1, 1, 1],
-      created_at: BASE_DAY
-      # TODO: This is incorrect when the `generate_rule` is called as unexpected.
+      created_at: BASE_DAY # NOTE: fake
     )
   end
   let(:rule2) do
     VerseRule::VerseRule.new(
       values: [2, 2, 2],
-      created_at: BASE_DAY + 1
-      # TODO: This is incorrect when the `generate_rule` is called as unexpected.
+      created_at: BASE_DAY + 1 # NOTE: fake
     )
   end
   let(:rule3) do
     VerseRule::VerseRule.new(
       values: [3, 3, 3],
-      created_at: BASE_DAY + 2
-      # TODO: This is incorrect when the `generate_rule` is called as unexpected.
+      created_at: BASE_DAY + 2 # NOTE: fake
     )
   end
 
