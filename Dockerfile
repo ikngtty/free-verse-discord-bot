@@ -1,7 +1,5 @@
 FROM ikngtty/ruby-mecab
 
-ENV LANG C.UTF-8
-
 WORKDIR /usr/src/
 
 # NOTE: Need not to install MeCab's IPA dictionary data, because
