@@ -9,11 +9,11 @@ RUN cd /usr/src/mecab/mecab-0.996 \
   && mkdir -p $(mecab-config --dicdir)
 
 # Install mecab-ipadic-NEologd
-RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 # NOTE: Instead of configuring that MeCab's `dicdir` is "mecab-ipadic-neologd",
 # get "mecab-ipadic-neologd" to pretend to be "ipadic", default `dicdir`.
-RUN mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -a -y\
-      -p /usr/local/lib/mecab/dic/ipadic
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git \
+  && cd mecab-ipadic-neologd \
+  && bin/install-mecab-ipadic-neologd -n -a -y -p /usr/local/lib/mecab/dic/ipadic
 
 # About the application's body
 WORKDIR /usr/src/app
