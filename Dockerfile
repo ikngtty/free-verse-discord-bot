@@ -2,14 +2,15 @@ FROM ikngtty/ruby-mecab
 
 ENV LANG C.UTF-8
 
+WORKDIR /usr/src/
+
 # NOTE: Need not to install MeCab's IPA dictionary data, because
 # mecab-ipadic-NEologd includes it. Instead, need to create the directory
 # which mecab-ipadic should have created.
-WORKDIR /usr/src/mecab/mecab-0.996
-RUN mkdir -p $(mecab-config --dicdir)
+RUN cd /usr/src/mecab/mecab-0.996 \
+  && mkdir -p $(mecab-config --dicdir)
 
 # Install mecab-ipadic-NEologd
-WORKDIR /usr/src/
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 # NOTE: Instead of configuring that MeCab's `dicdir` is "mecab-ipadic-neologd",
 # get "mecab-ipadic-neologd" to pretend to be "ipadic", default `dicdir`.
