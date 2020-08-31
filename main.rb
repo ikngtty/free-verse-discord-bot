@@ -33,7 +33,9 @@ generate_rule = VerseRule::Generator.new(
   get_random: get_random,
   get_today: get_today
 )
-rule_repository = VerseRule::RepositoryRedis.new
+rule_repository = VerseRule::RepositoryRedis.new(
+  redis_client: Redis.new
+)
 bot = Bot.new(
   generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,
