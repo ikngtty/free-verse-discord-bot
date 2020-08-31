@@ -7,6 +7,7 @@ require 'natto'
 require 'redis'
 require_relative './lib/bot'
 require_relative './lib/discord_event_handler'
+require_relative './lib/redis_wrapper'
 require_relative './lib/verse_rule/generator'
 require_relative './lib/verse_rule/repository_redis'
 
@@ -33,7 +34,10 @@ generate_rule = VerseRule::Generator.new(
   get_random: get_random,
   get_today: get_today
 )
-rule_repository = VerseRule::RepositoryRedis.new
+redis_wrapper = RedisWrapper.new(Redis.new)
+rule_repository = VerseRule::RepositoryRedis.new(
+  redis_client: redis_wrapper
+)
 bot = Bot.new(
   generate_rule: generate_rule,
   get_ikku_reviewer: get_ikku_reviewer,
