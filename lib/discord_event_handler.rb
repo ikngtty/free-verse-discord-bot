@@ -42,7 +42,19 @@ class DiscordEventHandler
   private
 
   def analyze(message_text, bot_id, managed_role_id)
-    re = /\A (?: \< @#{bot_id} \> | \< @!#{bot_id} \> | \< @&#{managed_role_id} \>) \s* (?<command> \S+) \s* (?<args> .*) \Z/mx
+    re = /\A (?:
+      \< @#{bot_id} \> |
+      \< @!#{bot_id} \> |
+      \< @&#{managed_role_id} \>
+      )
+
+      \s*
+
+      (?<command> \S+)
+
+      \s*
+
+      (?<args> .*) \Z/mx
     match = re.match(message_text)
     return AnalyzeResult.new(command?: false) if match.nil?
 
