@@ -100,5 +100,12 @@ RSpec.describe DiscordEventHandler do
       expect(bot).to receive(:mecab_command).with('abc   def', respond)
       handler.handle_message_event(event)
     end
+
+    it 'ignores texts in spoiler tags' do
+      content = 'abc||def||ghi||jkl||mno'
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with('abc||||ghi||||mno', respond)
+      handler.handle_message_event(event)
+    end
   end
 end
