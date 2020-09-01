@@ -25,18 +25,18 @@ class Bot
 
     rule_values = @rule_repository.current.values
     basho = @get_basho.call(rule: rule_values)
-    songs = basho.search(message)
-    result_messages = songs.map do |song|
-      verses = song.phrases.map(&:join)
-      <<~EOD
-        > #{verses[0]}
-        > #{verses[1]}
-        > #{verses[2]}
-      EOD
-    end
 
-    result_messages.uniq.each do |result|
-      respond.call(result)
+    songs = basho.search(message).lazy
+    songs = songs.map { |song| song.phrases.map(&:join) }
+    songs = songs.uniq
+
+    songs.each do |song|
+      message = <<~EOD
+        > #{song[0]}
+        > #{song[1]}
+        > #{song[2]}
+      EOD
+      respond.call(message)
     end
   end
 
