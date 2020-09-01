@@ -3,10 +3,10 @@
 require 'discordrb'
 require 'rspec'
 
-require_relative 'shared_context/with_discordrb_double'
-require_relative 'shared_context/with_server_double'
-require_relative '../lib/bot'
-require_relative '../lib/discord_event_handler'
+require_relative '../shared_context/with_discordrb_double'
+require_relative '../shared_context/with_server_double'
+require_relative '../../lib/bot'
+require_relative '../../lib/discord_event_handler'
 
 RSpec.describe DiscordEventHandler do
   subject(:handler) { described_class.new(bot: bot, discordrb_bot: discordrb_bot) }

@@ -3,10 +3,10 @@
 require 'json'
 require 'rspec'
 
-require_relative '../fake/redis'
-require_relative '../shared_context/with_fixed_today'
-require_relative '../../lib/verse_rule/repository_redis'
-require_relative '../../lib/verse_rule/verse_rule'
+require_relative '../../fake/redis'
+require_relative '../../shared_context/with_fixed_today'
+require_relative '../../../lib/verse_rule/repository_redis'
+require_relative '../../../lib/verse_rule/verse_rule'
 
 RSpec.describe VerseRule::RepositoryRedis do
   subject(:repo) { described_class.new(redis_client: redis) }

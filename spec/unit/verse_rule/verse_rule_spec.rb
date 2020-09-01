@@ -5,8 +5,8 @@ require 'json'
 
 require 'rspec'
 
-require_relative '../shared_context/with_fixed_today'
-require_relative '../../lib/verse_rule/verse_rule'
+require_relative '../../shared_context/with_fixed_today'
+require_relative '../../../lib/verse_rule/verse_rule'
 
 RSpec.describe VerseRule::VerseRule do
   subject(:rule) { described_class.new(values: [5, 7, 4], created_at: @today) }
