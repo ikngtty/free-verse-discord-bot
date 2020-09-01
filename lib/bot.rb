@@ -31,12 +31,12 @@ class Bot
     songs = songs.uniq
 
     songs.each do |song|
-      message = <<~EOD
+      response = <<~EOD
         > #{song[0]}
         > #{song[1]}
         > #{song[2]}
       EOD
-      respond.call(message)
+      respond.call(response)
     end
   end
 
