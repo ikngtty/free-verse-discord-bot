@@ -29,9 +29,7 @@ class Bot
     basho = @get_basho.call(rule: rule_values)
     songs = basho.search(message)
     songs.each do |song|
-      verses = song.phrases.map do |phrase|
-        phrase.map(&:to_s).join
-      end
+      verses = song.phrases.map(&:join)
       result_messages << <<~EOD
         > #{verses[0]}
         > #{verses[1]}
