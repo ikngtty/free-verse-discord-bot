@@ -22,19 +22,19 @@ class DiscordEventHandler
     if result.command?
       case result.command
       when 'mecab'
-        @bot.mecab_command(result.args_text, respond)
+        @bot.mecab_command(result.rest, respond)
       else
         @bot.unknown_command(respond)
       end
     else
-      @bot.detect(message_text, respond)
+      @bot.detect(result.rest, respond)
     end
   end
 
   AnalyzeResult = Struct.new(
     :command?,
     :command,
-    :args_text,
+    :rest,
     keyword_init: true
   )
   private_constant :AnalyzeResult
@@ -42,7 +42,10 @@ class DiscordEventHandler
   private
 
   def analyze(message_text, bot_id, managed_role_id)
-    re = /\A (?:
+    spoiler_regexp = / \|\| .+? \|\| /mx
+    message_text = message_text.gsub(spoiler_regexp, '||||')
+
+    command_regexp = /\A (?:
       \< @#{bot_id} \> |
       \< @!#{bot_id} \> |
       \< @&#{managed_role_id} \>
@@ -54,15 +57,15 @@ class DiscordEventHandler
 
       \s*
 
-      (?<args> .*) \Z/mx
-    match = re.match(message_text)
-    return AnalyzeResult.new(command?: false) if match.nil?
+      (?<rest> .*) \Z/mx
+    match = command_regexp.match(message_text)
+    return AnalyzeResult.new(command?: false, rest: message_text) if match.nil?
 
     captures = match.named_captures
     AnalyzeResult.new(
       command?: true,
       command: captures['command'],
-      args_text: captures['args']
+      rest: captures['rest']
     )
   end
 end
