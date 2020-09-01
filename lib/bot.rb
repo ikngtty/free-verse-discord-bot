@@ -23,14 +23,12 @@ class Bot
   def detect(message, respond)
     @rule_updater.exec_as_needed
 
-    result_messages = []
-
     rule_values = @rule_repository.current.values
     basho = @get_basho.call(rule: rule_values)
     songs = basho.search(message)
-    songs.each do |song|
+    result_messages = songs.map do |song|
       verses = song.phrases.map(&:join)
-      result_messages << <<~EOD
+      <<~EOD
         > #{verses[0]}
         > #{verses[1]}
         > #{verses[2]}
