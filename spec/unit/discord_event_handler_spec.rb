@@ -103,15 +103,17 @@ RSpec.describe DiscordEventHandler do
 
     it 'ignores texts in spoiler tags' do
       content = 'abc||def||ghi||jkl||mno'
+      ignored_content = 'abc||||ghi||||mno'
       content_holder[:value] = content
-      expect(bot).to receive(:detect).with('abc||||ghi||||mno', respond)
+      expect(bot).to receive(:detect).with(ignored_content, respond)
       handler.handle_message_event(event)
     end
 
     it 'ignores texts in spoiler tags over multiple lines' do
       content = "abc||def\nghi\njkl||mno"
+      ignored_content = 'abc||||mno'
       content_holder[:value] = content
-      expect(bot).to receive(:detect).with('abc||||mno', respond)
+      expect(bot).to receive(:detect).with(ignored_content, respond)
       handler.handle_message_event(event)
     end
   end
