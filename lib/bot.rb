@@ -40,6 +40,10 @@ class Bot
     end
   end
 
+  def delete(message, delete)
+    delete.call(message)
+  end
+
   def mecab_command(message, respond)
     respond.call("```\n#{@mecab.parse(message)}\n```")
   end

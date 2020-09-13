@@ -151,4 +151,43 @@ RSpec.describe DiscordEventHandler do
       handler.handle_message_event(event)
     end
   end
+
+  describe '#handle_reaction_add_event' do
+    let(:event) do
+      instance_double(
+        Discordrb::Events::ReactionAddEvent,
+        message: message,
+        emoji: emoji
+      )
+    end
+    let(:message) do
+      instance_double(
+        Discordrb::Message,
+        author: author_holder[:value]
+      )
+    end
+    let(:author_holder) { { value: member_bot_me } }
+    let(:emoji) do
+      instance_double(
+        Discordrb::Emoji,
+        name: emoji_name_holder[:value]
+      )
+    end
+    let(:emoji_name_holder) { { value: '❌' } }
+
+    it 'does not call any method when reacted message is others' do
+      author_holder[:value] = member_bot1
+      handler.handle_reaction_add_event(event)
+    end
+
+    it 'calls `delete` method when the reaction is "❌"' do
+      expect(bot).to receive(:delete)
+      handler.handle_reaction_add_event(event)
+    end
+
+    it 'does not call any method when the reaction is different' do
+      emoji_name_holder[:value] = '⭕'
+      handler.handle_reaction_add_event(event)
+    end
+  end
 end

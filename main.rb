@@ -55,5 +55,6 @@ bot_lib.ready do
 end
 
 bot_lib.message(&handler.method(:handle_message_event))
+bot_lib.reaction_add(&handler.method(:handle_reaction_add_event))
 
 bot_lib.run

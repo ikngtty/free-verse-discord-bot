@@ -31,6 +31,12 @@ class DiscordEventHandler
     end
   end
 
+  def handle_reaction_add_event(event)
+    return unless event.message.author.id == @bot_lib.profile.id
+
+    @bot.delete(event.message, :delete.to_proc) if event.emoji.name == '❌'
+  end
+
   AnalyzeResult = Struct.new(
     :command?,
     :command,
