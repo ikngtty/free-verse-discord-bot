@@ -116,5 +116,39 @@ RSpec.describe DiscordEventHandler do
       expect(bot).to receive(:detect).with(ignored_content, respond)
       handler.handle_message_event(event)
     end
+
+    it 'ignores quoted texts' do
+      content = <<~EOS
+        >KRIEG!
+        > KRIEG!
+        >  KRIEG!
+        VERY VELL. THEN LET IT BE KRIEG.
+      EOS
+      ignored_content = <<~EOS
+        >KRIEG!
+        >
+        >
+        VERY VELL. THEN LET IT BE KRIEG.
+      EOS
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with(ignored_content, respond)
+      handler.handle_message_event(event)
+    end
+
+    it 'ignores quoted texts over multiple lines' do
+      content = <<~EOS
+        She says:
+        >>> SEARCH
+        AND
+        DESTROY!
+      EOS
+      ignored_content = <<~EOS
+        She says:
+        >>>
+      EOS
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with(ignored_content, respond)
+      handler.handle_message_event(event)
+    end
   end
 end
