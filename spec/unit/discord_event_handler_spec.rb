@@ -107,5 +107,12 @@ RSpec.describe DiscordEventHandler do
       expect(bot).to receive(:detect).with('abc||||ghi||||mno', respond)
       handler.handle_message_event(event)
     end
+
+    it 'ignores texts in spoiler tags over multiple lines' do
+      content = "abc||def\nghi\njkl||mno"
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with('abc||||mno', respond)
+      handler.handle_message_event(event)
+    end
   end
 end
