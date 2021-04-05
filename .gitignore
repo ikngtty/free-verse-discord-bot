@@ -1,4 +1,6 @@
 .env
 
-# Gem files
-/vendor/
+# from https://github.com/github/gitignore/blob/218a941be92679ce67d0484547e3e142b2f5f6f0/Ruby.gitignore
+## Environment normalization:
+/.bundle/
+/vendor/bundle
