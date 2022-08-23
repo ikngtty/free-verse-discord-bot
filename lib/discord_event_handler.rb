@@ -48,7 +48,6 @@ class DiscordEventHandler
   private
 
   def analyze(message_text, bot_id, managed_role_id)
-
     quote_multiline_regexp = / ^ >>> \s .* \z /mx
     message_text = message_text.gsub(quote_multiline_regexp, ">>>\n")
 
@@ -59,9 +58,9 @@ class DiscordEventHandler
     message_text = message_text.gsub(spoiler_regexp, '||||')
 
     command_regexp = /\A (?:
-      \< @#{bot_id} \> |
-      \< @!#{bot_id} \> |
-      \< @&#{managed_role_id} \>
+      < @#{bot_id} > |
+      < @!#{bot_id} > |
+      < @&#{managed_role_id} >
       )
 
       \s*

@@ -13,9 +13,9 @@ require_relative '../../../lib/verse_rule/verse_rule'
 RSpec.describe VerseRule::Updater do
   subject(:updater) do
     described_class.new(
-      repository: repository,
-      generate_rule: generate_rule,
-      get_today: get_today
+      repository:,
+      generate_rule:,
+      get_today:
     )
   end
 

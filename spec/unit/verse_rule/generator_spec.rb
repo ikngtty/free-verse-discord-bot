@@ -10,7 +10,7 @@ require_relative '../../../lib/verse_rule/generator'
 
 RSpec.describe VerseRule::Generator do
   subject(:generator) do
-    described_class.new(get_random: get_random, get_today: get_today).call
+    described_class.new(get_random:, get_today:).call
   end
 
   include_context 'with fixed today'

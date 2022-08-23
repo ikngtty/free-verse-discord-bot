@@ -9,7 +9,7 @@ require_relative '../../lib/bot'
 require_relative '../../lib/discord_event_handler'
 
 RSpec.describe DiscordEventHandler do
-  subject(:handler) { described_class.new(bot: bot, discordrb_bot: discordrb_bot) }
+  subject(:handler) { described_class.new(bot:, discordrb_bot:) }
 
   include_context 'with discordrb double'
   include_context 'with server double'
@@ -156,8 +156,8 @@ RSpec.describe DiscordEventHandler do
     let(:event) do
       instance_double(
         Discordrb::Events::ReactionAddEvent,
-        message: message,
-        emoji: emoji
+        message:,
+        emoji:
       )
     end
     let(:message) do

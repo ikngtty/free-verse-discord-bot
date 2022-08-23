@@ -15,8 +15,8 @@ class Bot
 
     @rule_updater = VerseRule::Updater.new(
       repository: @rule_repository,
-      generate_rule: generate_rule,
-      get_today: get_today
+      generate_rule:,
+      get_today:
     )
   end
 

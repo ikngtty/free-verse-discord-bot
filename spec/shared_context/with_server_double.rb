@@ -23,31 +23,31 @@ RSpec.shared_context 'with server double' do
   let(:member1) do
     instance_double(
       Discordrb::Member, id: 10, bot_account?: false,
-      roles: [role1]
+                         roles: [role1]
     )
   end
   let(:member2) do
     instance_double(
       Discordrb::Member, id: 20, bot_account?: false,
-      roles: [role1, role2]
+                         roles: [role1, role2]
     )
   end
   let(:member3) do
     instance_double(
       Discordrb::Member, id: 30, bot_account?: false,
-      roles: [role1, role2, role3]
+                         roles: [role1, role2, role3]
     )
   end
   let(:member_bot1) do
     instance_double(
       Discordrb::Member, id: 15, bot_account?: true,
-      roles: [role1, role_bot1]
+                         roles: [role1, role_bot1]
     )
   end
   let(:member_bot_me) do
     instance_double(
       Discordrb::Member, id: bot_id, bot_account?: true,
-      roles: [role1, role_bot_me]
+                         roles: [role1, role_bot_me]
     )
   end
 
