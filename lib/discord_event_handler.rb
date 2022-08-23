@@ -57,6 +57,12 @@ class DiscordEventHandler
     spoiler_regexp = / \|\| .+? \|\| /mx
     message_text = message_text.gsub(spoiler_regexp, '||||')
 
+    code_multiline_regexp = / ``` .+? ``` /mx
+    message_text = message_text.gsub(code_multiline_regexp, "``````")
+
+    code_regexp = / ` .*? ` /mx
+    message_text = message_text.gsub(code_regexp, '``')
+
     command_regexp = /\A (?:
       < @#{bot_id} > |
       < @!#{bot_id} > |

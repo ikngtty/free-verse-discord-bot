@@ -150,6 +150,30 @@ RSpec.describe DiscordEventHandler do
       expect(bot).to receive(:detect).with(ignored_content, respond)
       handler.handle_message_event(event)
     end
+
+    it 'ignores code' do
+      content = 'Let\'s enter `puts "hello world"`.'
+      ignored_content = 'Let\'s enter ``.'
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with(ignored_content, respond)
+      handler.handle_message_event(event)
+    end
+
+    it 'ignores code over multiple lines' do
+      content = <<~EOS
+        Let's enter:
+        ```rb
+        puts "hello world"
+        ```
+      EOS
+      ignored_content = <<~EOS
+        Let's enter:
+        ``````
+      EOS
+      content_holder[:value] = content
+      expect(bot).to receive(:detect).with(ignored_content, respond)
+      handler.handle_message_event(event)
+    end
   end
 
   describe '#handle_reaction_add_event' do
