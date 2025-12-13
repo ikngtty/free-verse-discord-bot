@@ -28,7 +28,7 @@ get_random = method(:rand)
 get_today = Date.method(:today)
 mecab = Natto::MeCab.new
 get_ikku_reviewer = Ikku::Reviewer.method(:new)
-bot_lib = Discordrb::Bot.new token: token
+bot_lib = Discordrb::Bot.new token: token, intents: [:server_messages]
 
 generate_rule = VerseRule::Generator.new(
   get_random: get_random,
